@@ -598,26 +598,206 @@
 
     #toast.show { transform: translateY(0); opacity: 1; }
 
+    /* ── DEPOIMENTOS ── */
+    #depoimentos { background: var(--black); }
+
+    .depo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .depo-card {
+      background: var(--dark);
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid #2a2a2a;
+      position: relative;
+    }
+
+    .depo-card::before {
+      content: '"';
+      position: absolute;
+      top: 1rem; right: 1.5rem;
+      font-size: 4rem;
+      color: var(--red);
+      opacity: 0.3;
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .depo-stars { color: #f5c518; font-size: 0.9rem; margin-bottom: 1rem; }
+
+    .depo-text {
+      font-size: 0.9rem;
+      color: #ccc;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .depo-author {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .depo-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .depo-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .depo-since { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* ── MAPA ── */
+    #localizacao { background: var(--dark); padding: 0; }
+
+    .mapa-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 400px;
+    }
+
+    .mapa-info {
+      padding: 4rem 5%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .mapa-info .section-desc { margin-bottom: 2rem; }
+
+    .mapa-embed {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      border: none;
+      filter: grayscale(0.3) contrast(1.1);
+    }
+
+    /* ── WHATSAPP FLOAT ── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      width: 56px;
+      height: 56px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+      z-index: 999;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: pulse-wa 2s infinite;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 24px rgba(37,211,102,0.6);
+      animation: none;
+    }
+
+    @keyframes pulse-wa {
+      0%, 100% { box-shadow: 0 4px 16px rgba(37,211,102,0.4); }
+      50% { box-shadow: 0 4px 28px rgba(37,211,102,0.7); }
+    }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── ANIMAÇÕES SCROLL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      nav ul { display: none; }
+      nav ul {
+        display: none;
+        position: fixed;
+        top: 70px; left: 0; right: 0;
+        background: rgba(13,13,13,0.98);
+        flex-direction: column;
+        padding: 1.5rem 5%;
+        gap: 1.2rem;
+        border-bottom: 2px solid var(--red);
+      }
+      nav ul.open { display: flex; }
+      .hamburger { display: flex; }
       .contato-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .form-row { grid-template-columns: 1fr; }
       #hero { padding-top: 120px; }
+      .mapa-wrap { grid-template-columns: 1fr; }
+      .mapa-embed { min-height: 300px; }
     }
   </style>
 </head>
 <body>
 
+<!-- WHATSAPP FLUTUANTE -->
+<a href="https://wa.me/5531999990000" target="_blank" class="whatsapp-float" title="Fale no WhatsApp">💬</a>
+
 <!-- NAVBAR -->
 <nav>
   <a href="#hero" class="logo">CIA <span>DO</span> FITNESS</a>
-  <ul>
+  <ul id="navMenu">
     <li><a href="#modalidades">Modalidades</a></li>
     <li><a href="#planos">Planos</a></li>
     <li><a href="#horarios">Horários</a></li>
+    <li><a href="#depoimentos">Depoimentos</a></li>
     <li><a href="#contato" class="nav-cta">Matricule-se</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -852,6 +1032,95 @@
   </div>
 </section>
 
+<!-- DEPOIMENTOS -->
+<section id="depoimentos">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label">Quem treina aqui</div>
+    <h2 class="section-title">O que nossos alunos dizem</h2>
+    <p class="section-desc">Resultados reais de pessoas reais. Veja o que a comunidade Cia do Fitness tem a dizer.</p>
+    <div class="depo-grid">
+      <div class="depo-card reveal">
+        <div class="depo-stars">★★★★★</div>
+        <p class="depo-text">Perdi 12kg em 4 meses! A equipe é incrível, os professores são super atenciosos e o ambiente é muito motivador. Melhor investimento que já fiz na minha saúde.</p>
+        <div class="depo-author">
+          <div class="depo-avatar">AM</div>
+          <div>
+            <div class="depo-name">Ana Meireles</div>
+            <div class="depo-since">Aluna desde 2023</div>
+          </div>
+        </div>
+      </div>
+      <div class="depo-card reveal">
+        <div class="depo-stars">★★★★★</div>
+        <p class="depo-text">As aulas de Muay Thai mudaram minha vida. Além de emagrecer, ganhei muito mais disposição e autoconfiança. A estrutura da academia é top e os horários são super flexíveis.</p>
+        <div class="depo-author">
+          <div class="depo-avatar">RC</div>
+          <div>
+            <div class="depo-name">Rafael Costa</div>
+            <div class="depo-since">Aluno desde 2022</div>
+          </div>
+        </div>
+      </div>
+      <div class="depo-card reveal">
+        <div class="depo-stars">★★★★★</div>
+        <p class="depo-text">Vim por indicação e fiquei pelo resultado. O acompanhamento nutricional junto com a musculação foi fundamental. Em 6 meses transformei meu corpo completamente!</p>
+        <div class="depo-author">
+          <div class="depo-avatar">JF</div>
+          <div>
+            <div class="depo-name">Juliana Ferreira</div>
+            <div class="depo-since">Aluna desde 2024</div>
+          </div>
+        </div>
+      </div>
+      <div class="depo-card reveal">
+        <div class="depo-stars">★★★★★</div>
+        <p class="depo-text">Melhor academia de João Monlevade, sem dúvida. Equipamentos sempre novos, limpeza impecável e uma galera unida. Vale cada centavo do plano VIP.</p>
+        <div class="depo-author">
+          <div class="depo-avatar">MS</div>
+          <div>
+            <div class="depo-name">Marcos Silva</div>
+            <div class="depo-since">Aluno desde 2021</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALIZAÇÃO -->
+<section id="localizacao" style="padding:0;">
+  <div class="mapa-wrap">
+    <div class="mapa-info">
+      <div class="section-label">Como chegar</div>
+      <h2 class="section-title">Nossa<br>Localização</h2>
+      <p class="section-desc">Estamos no coração de João Monlevade, de fácil acesso e com estacionamento nas proximidades.</p>
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div class="info-text">
+          <strong>Endereço</strong>
+          <p>Av. Presidente Vargas, 500<br>Centro — João Monlevade/MG<br>CEP: 35930-000</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🚌</div>
+        <div class="info-text">
+          <strong>Transporte público</strong>
+          <p>Linhas 01, 03 e 07<br>Ponto de ônibus a 50m</p>
+        </div>
+      </div>
+      <a href="https://maps.google.com/?q=João+Monlevade+MG" target="_blank" class="btn btn-primary" style="display:inline-block;margin-top:0.5rem;">Abrir no Google Maps</a>
+    </div>
+    <iframe
+      class="mapa-embed"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3757.7!2d-43.17!3d-19.81!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zSm/Do28gTW9ubGV2YWRl!5e0!3m2!1spt-BR!2sbr!4v1"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Localização Cia do Fitness">
+    </iframe>
+  </div>
+</section>
+
 <!-- CONTATO -->
 <section id="contato">
   <div class="contato-grid">
@@ -945,6 +1214,7 @@
 <div id="toast">✅ Mensagem enviada! Entraremos em contato em breve.</div>
 
 <script>
+  // ── Formulário ──
   function handleSubmit(e) {
     e.preventDefault();
     const toast = document.getElementById('toast');
@@ -953,7 +1223,23 @@
     setTimeout(() => toast.classList.remove('show'), 4000);
   }
 
-  // Smooth active nav highlight
+  // ── Hamburger menu ──
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('navMenu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navMenu.classList.toggle('open');
+  });
+
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navMenu.classList.remove('open');
+    });
+  });
+
+  // ── Active nav highlight ──
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('nav ul a');
 
@@ -965,6 +1251,25 @@
     navLinks.forEach(a => {
       a.style.color = a.getAttribute('href') === '#' + current ? 'var(--red)' : '';
     });
+  });
+
+  // ── Reveal on scroll ──
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 120);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  revealEls.forEach(el => observer.observe(el));
+
+  // ── Adiciona classe reveal a cards ──
+  document.querySelectorAll('.modal-card, .plano-card, .stat-num').forEach(el => {
+    el.classList.add('reveal');
+    observer.observe(el);
   });
 </script>
 
