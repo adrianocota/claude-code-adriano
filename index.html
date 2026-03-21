@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cia do Fitness - João Monlevade/MG</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #e31e24;
+      --dark-red: #b71c1c;
+      --black: #0d0d0d;
+      --dark: #1a1a1a;
+      --gray: #2c2c2c;
+      --light-gray: #f5f5f5;
+      --white: #ffffff;
+      --text-muted: #999;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 70px;
+      background: rgba(13,13,13,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 2px solid var(--red);
+    }
+
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .logo span { color: var(--red); }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav ul a {
+      color: var(--white);
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    nav ul a:hover { color: var(--red); }
+
+    .nav-cta {
+      background: var(--red);
+      color: var(--white) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 4px;
+      transition: background 0.3s !important;
+    }
+
+    .nav-cta:hover { background: var(--dark-red) !important; color: var(--white) !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 5% 60px;
+      background:
+        linear-gradient(135deg, rgba(13,13,13,0.92) 0%, rgba(227,30,36,0.15) 100%),
+        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80') center/cover no-repeat;
+      position: relative;
+    }
+
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--black));
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      line-height: 1.05;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title span { color: var(--red); }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: #ccc;
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.9rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+    .btn-primary { background: var(--red); color: var(--white); }
+    .btn-outline { background: transparent; color: var(--white); border: 2px solid var(--white); }
+
+    /* ── STATS ── */
+    #stats {
+      background: var(--red);
+      padding: 3rem 5%;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 3rem;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.85;
+      margin-top: 0.3rem;
+    }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 6rem 5%; }
+
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      max-width: 540px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    /* ── MODALIDADES ── */
+    #modalidades { background: var(--dark); }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .modal-card {
+      background: var(--gray);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s;
+      border-top: 3px solid var(--red);
+    }
+
+    .modal-card:hover { transform: translateY(-6px); }
+
+    .modal-icon {
+      font-size: 2.8rem;
+      padding: 2rem 1.5rem 0.5rem;
+    }
+
+    .modal-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: uppercase;
+      padding: 0 1.5rem 0.5rem;
+    }
+
+    .modal-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      padding: 0 1.5rem 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* ── PLANOS ── */
+    #planos { background: var(--black); }
+
+    .planos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .plano-card {
+      background: var(--dark);
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      border: 1px solid #333;
+      position: relative;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .plano-card:hover { transform: translateY(-6px); }
+
+    .plano-card.destaque {
+      border-color: var(--red);
+      background: linear-gradient(135deg, #1a1a1a 0%, #1f0808 100%);
+    }
+
+    .badge-destaque {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.3rem 1rem;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .plano-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .plano-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .plano-price {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 2.8rem;
+      color: var(--red);
+      line-height: 1;
+    }
+
+    .plano-price sup { font-size: 1.2rem; vertical-align: super; }
+    .plano-price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+
+    .plano-features {
+      list-style: none;
+      margin: 1.5rem 0 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .plano-features li {
+      font-size: 0.88rem;
+      color: #ccc;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .plano-features li::before {
+      content: '✓';
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      background: var(--red);
+      border-radius: 50%;
+      font-size: 0.7rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .plano-features li.off {
+      opacity: 0.4;
+    }
+
+    .plano-features li.off::before {
+      content: '✗';
+      background: #555;
+    }
+
+    /* ── HORÁRIOS ── */
+    #horarios { background: var(--dark); }
+
+    .horarios-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    thead tr {
+      background: var(--red);
+    }
+
+    thead th {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 1rem 1.2rem;
+      text-align: left;
+    }
+
+    tbody tr:nth-child(even) { background: rgba(255,255,255,0.03); }
+    tbody tr:hover { background: rgba(227,30,36,0.08); }
+
+    tbody td {
+      padding: 0.9rem 1.2rem;
+      color: #ccc;
+      border-bottom: 1px solid #2a2a2a;
+    }
+
+    tbody td:first-child {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .turma-tag {
+      display: inline-block;
+      background: rgba(227,30,36,0.15);
+      border: 1px solid rgba(227,30,36,0.3);
+      color: #ff8080;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      margin: 2px;
+    }
+
+    /* ── CONTATO ── */
+    #contato { background: var(--black); }
+
+    .contato-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1000px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .contato-info h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .info-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--red);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .info-text strong {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .info-text p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── FORM ── */
+    form { display: flex; flex-direction: column; gap: 1rem; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      background: var(--gray);
+      border: 1px solid #3a3a3a;
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+      color: var(--white);
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.9rem;
+      transition: border-color 0.3s;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--red);
+    }
+
+    select option { background: var(--gray); }
+    textarea { resize: vertical; min-height: 120px; }
+
+    .btn-submit {
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 1rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      margin-top: 0.5rem;
+    }
+
+    .btn-submit:hover { background: var(--dark-red); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 2px solid var(--red);
+      padding: 3rem 5% 2rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-logo span { color: var(--red); }
+
+    footer p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .social-links a {
+      width: 42px;
+      height: 42px;
+      background: var(--gray);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: background 0.3s;
+    }
+
+    .social-links a:hover { background: var(--red); }
+
+    /* ── TOAST ── */
+    #toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.4s;
+      z-index: 9999;
+      font-size: 0.9rem;
+    }
+
+    #toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .contato-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      #hero { padding-top: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#hero" class="logo">CIA <span>DO</span> FITNESS</a>
+  <ul>
+    <li><a href="#modalidades">Modalidades</a></li>
+    <li><a href="#planos">Planos</a></li>
+    <li><a href="#horarios">Horários</a></li>
+    <li><a href="#contato" class="nav-cta">Matricule-se</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">João Monlevade • MG</div>
+    <h1 class="hero-title">Transforme seu<br><span>corpo e sua vida</span></h1>
+    <p class="hero-sub">
+      A academia que combina estrutura completa, profissionais qualificados e uma
+      comunidade motivada para você alcançar seus melhores resultados.
+    </p>
+    <div class="btn-group">
+      <a href="#planos" class="btn btn-primary">Ver planos</a>
+      <a href="#contato" class="btn btn-outline">Fale conosco</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="stats-grid">
+    <div>
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Anos de experiência</div>
+    </div>
+    <div>
+      <div class="stat-num">2000+</div>
+      <div class="stat-label">Alunos ativos</div>
+    </div>
+    <div>
+      <div class="stat-num">15+</div>
+      <div class="stat-label">Modalidades</div>
+    </div>
+    <div>
+      <div class="stat-num">30+</div>
+      <div class="stat-label">Profissionais</div>
+    </div>
+  </div>
+</div>
+
+<!-- MODALIDADES -->
+<section id="modalidades">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label">O que oferecemos</div>
+    <h2 class="section-title">Nossas Modalidades</h2>
+    <p class="section-desc">
+      De musculação a aulas coletivas, temos tudo que você precisa para
+      manter o foco e evoluir sempre.
+    </p>
+    <div class="modal-grid">
+      <div class="modal-card">
+        <div class="modal-icon">🏋️</div>
+        <h3>Musculação</h3>
+        <p>Equipamentos modernos e professores especializados para maximizar seus ganhos.</p>
+      </div>
+      <div class="modal-card">
+        <div class="modal-icon">🥊</div>
+        <h3>Muay Thai</h3>
+        <p>Arte marcial completa para condicionamento, defesa pessoal e emagrecimento.</p>
+      </div>
+      <div class="modal-card">
+        <div class="modal-icon">💃</div>
+        <h3>Dança</h3>
+        <p>Zumba e ritmos variados para queimar calorias sem perceber.</p>
+      </div>
+      <div class="modal-card">
+        <div class="modal-icon">🧘</div>
+        <h3>Yoga & Pilates</h3>
+        <p>Equilíbrio, flexibilidade e fortalecimento do core com instrutores certificados.</p>
+      </div>
+      <div class="modal-card">
+        <div class="modal-icon">🚴</div>
+        <h3>Spinning</h3>
+        <p>Aulas de ciclismo indoor com alta intensidade e muito ritmo.</p>
+      </div>
+      <div class="modal-card">
+        <div class="modal-icon">🏃</div>
+        <h3>Funcional</h3>
+        <p>Treinos funcionais que melhoram desempenho no dia a dia e na vida esportiva.</p>
+      </div>
+      <div class="modal-card">
+        <div class="modal-icon">🤸</div>
+        <h3>Crossfit</h3>
+        <p>Programa de alta intensidade que combina força, potência e resistência.</p>
+      </div>
+      <div class="modal-card">
+        <div class="modal-icon">🥗</div>
+        <h3>Nutrição</h3>
+        <p>Consultoria nutricional integrada para potencializar seus resultados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANOS -->
+<section id="planos">
+  <div style="max-width:1100px;margin:0 auto;text-align:center;">
+    <div class="section-label">Invista em você</div>
+    <h2 class="section-title">Escolha seu Plano</h2>
+    <p class="section-desc" style="margin:0 auto 3rem;">
+      Planos flexíveis para se encaixar na sua rotina e no seu bolso.
+      Sem taxa de matrícula no primeiro mês!
+    </p>
+    <div class="planos-grid">
+
+      <!-- BÁSICO -->
+      <div class="plano-card">
+        <div class="plano-name">Básico</div>
+        <div class="plano-desc">Perfeito para começar</div>
+        <div class="plano-price"><sup>R$</sup>89<span>/mês</span></div>
+        <ul class="plano-features">
+          <li>Musculação livre</li>
+          <li>Vestiário completo</li>
+          <li>Avaliação física inicial</li>
+          <li>Acesso das 06h às 22h</li>
+          <li class="off">Aulas coletivas</li>
+          <li class="off">Consulta nutricional</li>
+        </ul>
+        <a href="#contato" class="btn btn-outline" style="width:100%;text-align:center;">Começar agora</a>
+      </div>
+
+      <!-- PREMIUM (destaque) -->
+      <div class="plano-card destaque">
+        <div class="badge-destaque">⚡ Mais popular</div>
+        <div class="plano-name">Premium</div>
+        <div class="plano-desc">A escolha da maioria dos alunos</div>
+        <div class="plano-price"><sup>R$</sup>149<span>/mês</span></div>
+        <ul class="plano-features">
+          <li>Musculação livre</li>
+          <li>Vestiário completo</li>
+          <li>Avaliação física mensal</li>
+          <li>Acesso 24 horas</li>
+          <li>Todas as aulas coletivas</li>
+          <li class="off">Consulta nutricional</li>
+        </ul>
+        <a href="#contato" class="btn btn-primary" style="width:100%;text-align:center;">Quero o Premium</a>
+      </div>
+
+      <!-- VIP -->
+      <div class="plano-card">
+        <div class="plano-name">VIP</div>
+        <div class="plano-desc">Experiência completa</div>
+        <div class="plano-price"><sup>R$</sup>219<span>/mês</span></div>
+        <ul class="plano-features">
+          <li>Musculação livre</li>
+          <li>Vestiário premium com toalha</li>
+          <li>Avaliação física quinzenal</li>
+          <li>Acesso 24 horas</li>
+          <li>Todas as aulas coletivas</li>
+          <li>Consulta nutricional mensal</li>
+        </ul>
+        <a href="#contato" class="btn btn-outline" style="width:100%;text-align:center;">Quero o VIP</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HORÁRIOS -->
+<section id="horarios">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label">Organize sua semana</div>
+    <h2 class="section-title">Grade de Horários</h2>
+    <p class="section-desc">Aulas disponíveis de segunda a sábado para você nunca perder um treino.</p>
+    <div class="horarios-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Horário</th>
+            <th>Segunda / Quarta</th>
+            <th>Terça / Quinta</th>
+            <th>Sexta</th>
+            <th>Sábado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>06:00</td>
+            <td><span class="turma-tag">Spinning</span></td>
+            <td><span class="turma-tag">Funcional</span></td>
+            <td><span class="turma-tag">Spinning</span></td>
+            <td><span class="turma-tag">Funcional</span></td>
+          </tr>
+          <tr>
+            <td>07:30</td>
+            <td><span class="turma-tag">Yoga</span></td>
+            <td><span class="turma-tag">Pilates</span></td>
+            <td><span class="turma-tag">Yoga</span></td>
+            <td><span class="turma-tag">Zumba</span></td>
+          </tr>
+          <tr>
+            <td>09:00</td>
+            <td><span class="turma-tag">Zumba</span></td>
+            <td><span class="turma-tag">Muay Thai</span></td>
+            <td><span class="turma-tag">Crossfit</span></td>
+            <td><span class="turma-tag">Muay Thai</span></td>
+          </tr>
+          <tr>
+            <td>12:00</td>
+            <td><span class="turma-tag">Funcional</span></td>
+            <td><span class="turma-tag">Spinning</span></td>
+            <td><span class="turma-tag">Funcional</span></td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>17:00</td>
+            <td><span class="turma-tag">Muay Thai</span></td>
+            <td><span class="turma-tag">Zumba</span></td>
+            <td><span class="turma-tag">Pilates</span></td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>18:30</td>
+            <td><span class="turma-tag">Crossfit</span></td>
+            <td><span class="turma-tag">Crossfit</span></td>
+            <td><span class="turma-tag">Muay Thai</span></td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>20:00</td>
+            <td><span class="turma-tag">Spinning</span></td>
+            <td><span class="turma-tag">Yoga</span></td>
+            <td><span class="turma-tag">Zumba</span></td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:0.8rem;color:var(--text-muted);margin-top:1rem;text-align:right;">
+      * Grade sujeita a alterações. Confirme com a recepção.
+    </p>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="contato-grid">
+    <div class="contato-info">
+      <div class="section-label">Vamos conversar</div>
+      <h2 class="section-title">Entre em<br>Contato</h2>
+      <p class="section-desc">Tire suas dúvidas, agende uma visita ou faça sua matrícula. Estamos prontos para te atender!</p>
+      <h3>Informações</h3>
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div class="info-text">
+          <strong>Endereço</strong>
+          <p>Av. Presidente Vargas, 500<br>Centro — João Monlevade/MG</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">📞</div>
+        <div class="info-text">
+          <strong>Telefone / WhatsApp</strong>
+          <p>(31) 99999-0000</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🕐</div>
+        <div class="info-text">
+          <strong>Funcionamento</strong>
+          <p>Seg–Sex: 06h às 23h<br>Sábado: 07h às 18h<br>Domingo: 08h às 13h</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">✉️</div>
+        <div class="info-text">
+          <strong>E-mail</strong>
+          <p>contato@ciadofitness.com.br</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <form id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div>
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" placeholder="Seu nome completo" required />
+          </div>
+          <div>
+            <label for="telefone">Telefone / WhatsApp</label>
+            <input type="tel" id="telefone" placeholder="(31) 00000-0000" required />
+          </div>
+        </div>
+        <div>
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="seu@email.com" required />
+        </div>
+        <div>
+          <label for="plano">Plano de interesse</label>
+          <select id="plano">
+            <option value="">Selecione um plano</option>
+            <option value="basico">Básico — R$ 89/mês</option>
+            <option value="premium">Premium — R$ 149/mês</option>
+            <option value="vip">VIP — R$ 219/mês</option>
+            <option value="duvida">Só tenho dúvidas</option>
+          </select>
+        </div>
+        <div>
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" placeholder="Como podemos te ajudar?"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Enviar mensagem 🚀</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">CIA <span>DO</span> FITNESS</div>
+  <p>João Monlevade • Minas Gerais</p>
+  <div class="social-links">
+    <a href="#" title="Instagram">📸</a>
+    <a href="#" title="Facebook">📘</a>
+    <a href="#" title="WhatsApp">💬</a>
+    <a href="#" title="YouTube">▶️</a>
+  </div>
+  <p style="font-size:0.78rem;margin-top:1rem;">
+    © 2026 Cia do Fitness. Todos os direitos reservados.
+  </p>
+</footer>
+
+<!-- TOAST -->
+<div id="toast">✅ Mensagem enviada! Entraremos em contato em breve.</div>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    e.target.reset();
+    setTimeout(() => toast.classList.remove('show'), 4000);
+  }
+
+  // Smooth active nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav ul a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--red)' : '';
+    });
+  });
+</script>
+
+</body>
+</html>
