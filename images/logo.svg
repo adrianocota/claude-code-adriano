@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 350" fill="#1a1a1a">
+
+  <!-- Máscara para criar o formato de C/crescente -->
+  <defs>
+    <mask id="crescente">
+      <rect width="480" height="350" fill="white"/>
+      <!-- Círculo que cria o recorte interno (abre o C à direita) -->
+      <ellipse cx="228" cy="112" rx="74" ry="74" fill="black"/>
+    </mask>
+  </defs>
+
+  <!-- Forma de lua crescente (C) -->
+  <circle cx="188" cy="112" r="102" mask="url(#crescente)"/>
+
+  <!-- Silhueta humana atlética -->
+  <!-- Cabeça -->
+  <ellipse cx="224" cy="52" rx="17" ry="19"/>
+
+  <!-- Corpo / tronco diagonal -->
+  <path d="M 224,70 C 220,78 214,90 208,108 C 203,124 202,138 208,148
+           C 214,157 224,157 232,148 C 240,138 242,122 238,105
+           C 234,88 230,76 224,70 Z"/>
+
+  <!-- Braço / elemento superior direito (sai pelo recorte do C) -->
+  <path d="M 232,82 C 240,70 252,54 264,40 C 270,32 274,26 270,21
+           C 265,15 256,22 248,32 C 236,46 226,66 222,76 Z"/>
+
+  <!-- Perna / elemento inferior esquerdo -->
+  <path d="M 205,145 C 200,158 193,174 188,192 C 184,205 182,214 177,216
+           C 172,218 169,212 172,202 C 175,190 182,174 186,160
+           C 190,148 196,138 205,138 Z"/>
+
+  <!-- Perna / elemento inferior direito -->
+  <path d="M 232,148 C 238,162 248,178 258,192 C 265,202 268,208 264,213
+           C 260,218 252,212 244,200 C 234,185 224,166 218,150 Z"/>
+
+  <!-- Texto: COMPANHIA DO -->
+  <text x="240" y="252"
+        font-family="'Arial Narrow', 'Arial', sans-serif"
+        font-size="36"
+        font-weight="700"
+        letter-spacing="5"
+        text-anchor="middle">COMPANHIA DO</text>
+
+  <!-- Texto: FITNESS (grande, itálico, condensado) -->
+  <text x="240" y="330"
+        font-family="'Arial Narrow', 'Impact', 'Arial Black', sans-serif"
+        font-size="96"
+        font-weight="900"
+        font-style="italic"
+        letter-spacing="-2"
+        text-anchor="middle">FITNESS</text>
+
+</svg>
