@@ -9,8 +9,8 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --red: #D4A820;       /* amarelo ouro */
-      --dark-red: #A8850A;  /* ouro escuro */
+      --red: #FFD600;       /* amarelo forte */
+      --dark-red: #E6B800;  /* amarelo escuro */
       --black: #0d0d0d;
       --dark: #1a1a1a;
       --gray: #2c2c2c;
@@ -44,15 +44,17 @@
     }
 
     .logo {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 1.5rem;
-      color: var(--white);
+      display: flex;
+      align-items: center;
       text-decoration: none;
-      letter-spacing: 1px;
     }
 
-    .logo span { color: var(--red); }
+    .logo img {
+      height: 50px;
+      width: auto;
+      /* logo branca sobre fundo escuro */
+      filter: brightness(0) invert(1);
+    }
 
     nav ul {
       display: flex;
@@ -92,7 +94,7 @@
       text-align: center;
       padding: 100px 5% 60px;
       background:
-        linear-gradient(135deg, rgba(13,13,13,0.92) 0%, rgba(212,168,32,0.12) 100%),
+        linear-gradient(135deg, rgba(13,13,13,0.92) 0%, rgba(255,214,0,0.12) 100%),
         url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80') center/cover no-repeat;
       position: relative;
     }
@@ -591,13 +593,14 @@
     }
 
     .footer-logo {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
 
-    .footer-logo span { color: var(--red); }
+    .footer-logo img {
+      height: 70px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
 
     footer p {
       font-size: 0.85rem;
@@ -836,7 +839,9 @@
 
 <!-- NAVBAR -->
 <nav>
-  <a href="#hero" class="logo">CIA <span>DO</span> FITNESS</a>
+  <a href="#hero" class="logo">
+    <img src="images/logo.svg" alt="Cia do Fitness" />
+  </a>
   <ul id="navMenu">
     <li><a href="#modalidades">Modalidades</a></li>
     <li><a href="#planos">Planos</a></li>
@@ -1284,7 +1289,9 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">CIA <span>DO</span> FITNESS</div>
+  <div class="footer-logo">
+    <img src="images/logo.svg" alt="Cia do Fitness" />
+  </div>
   <p>João Monlevade • Minas Gerais</p>
   <div class="social-links">
     <a href="https://www.instagram.com/ciadofitness" target="_blank" title="Instagram">📸</a>
