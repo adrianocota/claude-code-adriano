@@ -1,0 +1,30 @@
+name: Publicar automaticamente branches do Claude
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  auto-merge:
+    # Executa apenas para branches que começam com "claude/"
+    if: startsWith(github.head_ref, 'claude/')
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Mesclar PR automaticamente
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.pulls.merge({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              merge_method: 'merge',
+              commit_title: `Auto-merge: ${context.payload.pull_request.title}`
+            });
+            console.log('PR mesclado com sucesso!');
