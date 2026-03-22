@@ -9,8 +9,8 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --red: #e31e24;
-      --dark-red: #b71c1c;
+      --red: #D4A820;       /* amarelo ouro */
+      --dark-red: #A8850A;  /* ouro escuro */
       --black: #0d0d0d;
       --dark: #1a1a1a;
       --gray: #2c2c2c;
@@ -92,7 +92,7 @@
       text-align: center;
       padding: 100px 5% 60px;
       background:
-        linear-gradient(135deg, rgba(13,13,13,0.92) 0%, rgba(227,30,36,0.15) 100%),
+        linear-gradient(135deg, rgba(13,13,13,0.92) 0%, rgba(212,168,32,0.12) 100%),
         url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80') center/cover no-repeat;
       position: relative;
     }
@@ -243,8 +243,19 @@
     .modal-card:hover { transform: translateY(-6px); }
 
     .modal-icon {
-      font-size: 2.8rem;
-      padding: 2rem 1.5rem 0.5rem;
+      padding: 2rem 1.5rem 0.8rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .modal-icon svg {
+      width: 48px;
+      height: 48px;
+      stroke: var(--red);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .modal-card h3 {
@@ -286,7 +297,7 @@
 
     .plano-card.destaque {
       border-color: var(--red);
-      background: linear-gradient(135deg, #1a1a1a 0%, #1f0808 100%);
+      background: linear-gradient(135deg, #1a1a1a 0%, #1a1500 100%);
     }
 
     .badge-destaque {
@@ -399,7 +410,7 @@
     }
 
     tbody tr:nth-child(even) { background: rgba(255,255,255,0.03); }
-    tbody tr:hover { background: rgba(227,30,36,0.08); }
+    tbody tr:hover { background: rgba(212,168,32,0.08); }
 
     tbody td {
       padding: 0.9rem 1.2rem;
@@ -413,15 +424,53 @@
       color: var(--white);
     }
 
+    /* Tags da grade — cor base e variantes por atividade */
     .turma-tag {
       display: inline-block;
-      background: rgba(227,30,36,0.15);
-      border: 1px solid rgba(227,30,36,0.3);
-      color: #ff8080;
-      font-size: 0.75rem;
-      padding: 0.2rem 0.5rem;
-      border-radius: 3px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
       margin: 2px;
+      border: 1px solid transparent;
+    }
+
+    /* Jump — roxo */
+    .turma-tag.jump {
+      background: rgba(138,43,226,0.2);
+      border-color: rgba(138,43,226,0.5);
+      color: #BF7FFF;
+    }
+
+    /* Zumba — rosa quente */
+    .turma-tag.zumba {
+      background: rgba(220,20,140,0.2);
+      border-color: rgba(220,20,140,0.5);
+      color: #FF5DAE;
+    }
+
+    /* Funcional — laranja */
+    .turma-tag.funcional {
+      background: rgba(230,100,10,0.2);
+      border-color: rgba(230,100,10,0.5);
+      color: #FF8C3A;
+    }
+
+    /* Combat — azul aço */
+    .turma-tag.combat {
+      background: rgba(30,100,200,0.2);
+      border-color: rgba(30,100,200,0.5);
+      color: #5BA3FF;
+    }
+
+    /* Cardiomix — verde-água */
+    .turma-tag.cardiomix {
+      background: rgba(0,168,140,0.2);
+      border-color: rgba(0,168,140,0.5);
+      color: #00D9B8;
     }
 
     /* ── CONTATO ── */
@@ -806,7 +855,7 @@
     <div class="hero-badge">+ 20 Anos em João Monlevade</div>
     <h1 class="hero-title">Inspire. Transpire.<br><span>Transforme.</span></h1>
     <p class="hero-sub">
-      Musculação + mais de 160 aulas Fast Training por mês — das 7h às 22h de seg. a sex.
+      Musculação + mais de 160 aulas Fast Training por mês — de seg. a sex. das 06h às 22h e sáb. das 08h às 12h
       Formato exclusivo: 30 min de alta intensidade e mais de 700kcal por aula.
     </p>
     <div class="btn-group">
@@ -849,32 +898,44 @@
     </p>
     <div class="modal-grid">
       <div class="modal-card">
-        <div class="modal-icon">🏋️</div>
+        <div class="modal-icon">
+          <svg viewBox="0 0 48 48"><rect x="1" y="20" width="7" height="8" rx="2"/><rect x="8" y="22" width="5" height="4" rx="1"/><line x1="13" y1="24" x2="35" y2="24"/><rect x="35" y="22" width="5" height="4" rx="1"/><rect x="40" y="20" width="7" height="8" rx="2"/></svg>
+        </div>
         <h3>Musculação</h3>
         <p>Treino personalizado com acompanhamento de instrutores capacitados e equipamentos de qualidade.</p>
       </div>
       <div class="modal-card">
-        <div class="modal-icon">🦘</div>
+        <div class="modal-icon">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="7" r="4"/><path d="M24 11 L20 22 L14 28"/><path d="M24 11 L28 22 L34 28"/><line x1="14" y1="28" x2="34" y2="28"/><path d="M20 22 L18 34"/><path d="M28 22 L30 34"/><line x1="10" y1="40" x2="38" y2="40" stroke-width="2.5"/></svg>
+        </div>
         <h3>Jump</h3>
         <p>Ginástica no mini-trampolim. Proporciona emagrecimento, condicionamento físico e alto gasto calórico — força muscular para pernas e bumbum.<br><small style="color:#aaa;">Benefícios: Diversão · Força nos membros inferiores · Alto gasto calórico</small></p>
       </div>
       <div class="modal-card">
-        <div class="modal-icon">💃</div>
+        <div class="modal-icon">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="7" r="4"/><path d="M24 11 C20 16 16 18 14 24"/><path d="M24 11 C28 16 30 20 34 22"/><path d="M14 24 C16 30 18 34 20 40"/><path d="M34 22 C32 28 28 34 26 40"/><path d="M14 24 L10 20"/><path d="M34 22 L38 18"/></svg>
+        </div>
         <h3>Zumba</h3>
         <p>Ginástica e dança com ritmos latinos e internacionais. Elimine calorias com muita alegria e diversão.<br><small style="color:#aaa;">Benefícios: Emagrecimento · Elimina estresse · Define o corpo</small></p>
       </div>
       <div class="modal-card">
-        <div class="modal-icon">🥊</div>
+        <div class="modal-icon">
+          <svg viewBox="0 0 48 48"><path d="M10 20 C10 14 15 10 22 10 L30 10 C36 10 40 14 40 20 L40 30 C40 36 36 40 30 40 L18 40 C13 40 10 36 10 30 Z"/><rect x="10" y="22" width="4" height="10" rx="2"/><line x1="16" y1="10" x2="16" y2="18"/><line x1="22" y1="10" x2="22" y2="18"/><line x1="28" y1="10" x2="28" y2="18"/></svg>
+        </div>
         <h3>Combat</h3>
         <p>Ginástica baseada em artes marciais: karatê, boxe, Muay Thai. Alto gasto calórico e resultados incríveis.<br><small style="color:#aaa;">Benefícios: Elimina estresse · Flexibilidade · Definição muscular</small></p>
       </div>
       <div class="modal-card">
-        <div class="modal-icon">🏃</div>
+        <div class="modal-icon">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="6" r="4"/><path d="M24 10 L22 20 L14 24"/><path d="M22 20 L26 32 L20 42"/><path d="M22 20 L32 18 L36 12"/><path d="M26 32 L34 36"/></svg>
+        </div>
         <h3>Funcional</h3>
         <p>Aula em grupo com estações trabalhando capacidades físicas do dia a dia: empurrar, saltar, puxar, agachar.<br><small style="color:#aaa;">Benefícios: Emagrecimento · Fortalecimento · Definição muscular</small></p>
       </div>
       <div class="modal-card">
-        <div class="modal-icon">🔥</div>
+        <div class="modal-icon">
+          <svg viewBox="0 0 48 48"><path d="M24 38 C24 38 8 28 8 18 C8 13 12 9 17 9 C20 9 23 11 24 13 C25 11 28 9 31 9 C36 9 40 13 40 18 C40 28 24 38 24 38 Z"/><polyline points="18,22 22,16 26,24 30,18"/></svg>
+        </div>
         <h3>Cardiomix</h3>
         <p>Aula em grupo com cordas, step e peso corporal — estímulos aeróbicos para queima intensa de calorias.<br><small style="color:#aaa;">Benefícios: Condicionamento · Queima de gordura · Bem-estar</small></p>
       </div>
@@ -953,100 +1014,100 @@
         <tbody>
           <tr>
             <td>07:00</td>
-            <td><span class="turma-tag">Jump</span></td>
-            <td><span class="turma-tag">Zumba</span></td>
-            <td><span class="turma-tag">Jump</span></td>
-            <td><span class="turma-tag">Zumba</span></td>
-            <td><span class="turma-tag">Jump</span></td>
+            <td><span class="turma-tag jump">Jump</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
+            <td><span class="turma-tag jump">Jump</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
+            <td><span class="turma-tag jump">Jump</span></td>
             <td>—</td>
           </tr>
           <tr>
             <td>07:40</td>
-            <td><span class="turma-tag">Funcional</span></td>
-            <td><span class="turma-tag">Cardiomix</span></td>
-            <td><span class="turma-tag">Funcional</span></td>
-            <td><span class="turma-tag">Cardiomix</span></td>
-            <td><span class="turma-tag">Funcional</span></td>
+            <td><span class="turma-tag funcional">Funcional</span></td>
+            <td><span class="turma-tag cardiomix">Cardiomix</span></td>
+            <td><span class="turma-tag funcional">Funcional</span></td>
+            <td><span class="turma-tag cardiomix">Cardiomix</span></td>
+            <td><span class="turma-tag funcional">Funcional</span></td>
             <td>—</td>
           </tr>
           <tr>
             <td>08:20</td>
-            <td><span class="turma-tag">Zumba</span></td>
-            <td><span class="turma-tag">Jump</span></td>
-            <td><span class="turma-tag">Zumba</span></td>
-            <td><span class="turma-tag">Jump</span></td>
-            <td><span class="turma-tag">Zumba</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
+            <td><span class="turma-tag jump">Jump</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
+            <td><span class="turma-tag jump">Jump</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
             <td>—</td>
           </tr>
           <tr>
             <td>09:00</td>
-            <td><span class="turma-tag">Combat</span></td>
-            <td><span class="turma-tag">Zumba</span></td>
-            <td><span class="turma-tag">Combat</span></td>
-            <td><span class="turma-tag">Zumba</span></td>
-            <td><span class="turma-tag">Combat</span></td>
-            <td><span class="turma-tag">Zumba</span></td>
+            <td><span class="turma-tag combat">Combat</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
+            <td><span class="turma-tag combat">Combat</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
+            <td><span class="turma-tag combat">Combat</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
           </tr>
           <tr>
             <td>09:40</td>
-            <td><span class="turma-tag">Zumba</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
             <td>—</td>
-            <td><span class="turma-tag">Zumba</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
             <td>—</td>
-            <td><span class="turma-tag">Zumba</span></td>
-            <td><span class="turma-tag">Zumba</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
           </tr>
           <tr>
             <td>16:00</td>
             <td>—</td>
-            <td><span class="turma-tag">Zumba</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
             <td>—</td>
-            <td><span class="turma-tag">Zumba</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
             <td>—</td>
             <td>—</td>
           </tr>
           <tr>
             <td>16:40</td>
             <td>—</td>
-            <td><span class="turma-tag">Zumba</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
             <td>—</td>
-            <td><span class="turma-tag">Zumba</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
             <td>—</td>
             <td>—</td>
           </tr>
           <tr>
             <td>17:20</td>
-            <td><span class="turma-tag">Jump</span></td>
+            <td><span class="turma-tag jump">Jump</span></td>
             <td>—</td>
-            <td><span class="turma-tag">Jump</span></td>
+            <td><span class="turma-tag jump">Jump</span></td>
             <td>—</td>
             <td>—</td>
             <td>—</td>
           </tr>
           <tr>
             <td>18:00</td>
-            <td><span class="turma-tag">Zumba</span></td>
-            <td><span class="turma-tag">Jump</span></td>
-            <td><span class="turma-tag">Zumba</span></td>
-            <td><span class="turma-tag">Jump</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
+            <td><span class="turma-tag jump">Jump</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
+            <td><span class="turma-tag jump">Jump</span></td>
             <td>—</td>
             <td>—</td>
           </tr>
           <tr>
             <td>18:40</td>
-            <td><span class="turma-tag">Funcional</span></td>
-            <td><span class="turma-tag">Zumba</span></td>
-            <td><span class="turma-tag">Funcional</span></td>
-            <td><span class="turma-tag">Zumba</span></td>
+            <td><span class="turma-tag funcional">Funcional</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
+            <td><span class="turma-tag funcional">Funcional</span></td>
+            <td><span class="turma-tag zumba">Zumba</span></td>
             <td>—</td>
             <td>—</td>
           </tr>
           <tr>
             <td>19:20</td>
             <td>—</td>
-            <td><span class="turma-tag">Cardiomix</span></td>
+            <td><span class="turma-tag cardiomix">Cardiomix</span></td>
             <td>—</td>
-            <td><span class="turma-tag">Cardiomix</span></td>
+            <td><span class="turma-tag cardiomix">Cardiomix</span></td>
             <td>—</td>
             <td>—</td>
           </tr>
@@ -1125,7 +1186,7 @@
         <div class="info-icon">📍</div>
         <div class="info-text">
           <strong>Endereço</strong>
-          <p>Av. Presidente Vargas, 500<br>Centro — João Monlevade/MG<br>CEP: 35930-000</p>
+          <p>Av. Wilson Alvarenga, 1732<br>Carneirinhos — João Monlevade/MG<br>CEP: 35930-001</p>
         </div>
       </div>
       <div class="info-item">
@@ -1160,7 +1221,7 @@
         <div class="info-icon">📍</div>
         <div class="info-text">
           <strong>Endereço</strong>
-          <p>Av. Presidente Vargas, 500<br>Centro — João Monlevade/MG</p>
+          <p>Av. Wilson Alvarenga, 1732<br>Carneirinhos — João Monlevade/MG<br>CEP: 35930-001</p>
         </div>
       </div>
       <div class="info-item">
@@ -1174,14 +1235,14 @@
         <div class="info-icon">🕐</div>
         <div class="info-text">
           <strong>Funcionamento</strong>
-          <p>Seg–Sex: 07h às 22h<br>Sábado: pela manhã</p>
+          <p>Seg–Sex: 06h às 22h<br>Sábado: 08h às 12h</p>
         </div>
       </div>
       <div class="info-item">
         <div class="info-icon">✉️</div>
         <div class="info-text">
           <strong>E-mail</strong>
-          <p>contato@ciadofitness.com.br</p>
+          <p>ciadofitness@gmail.com</p>
         </div>
       </div>
     </div>
